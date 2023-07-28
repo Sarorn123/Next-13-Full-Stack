@@ -37,16 +37,6 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-}
-
 model VerificationToken {
   identifier String
   token      String   @unique
@@ -55,10 +45,31 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-model Post {
-  id        Int      @id @default(autoincrement())
-  title     String
-  content   String?  @db.Text
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model User {
+  id            String      @id @default(cuid())
+  name          String?
+  email         String?     @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  containers    Container[]
+}
+
+model Container {
+  id            String @id @default(uuid())
+  color         String
+  label         String
+  user          User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId        String
+  todos         Todo[]
+}
+
+model Todo {
+  id          String    @id @default(uuid())
+  title       String
+  sort        Int       @default(0)
+  createdAt   DateTime  @default(now())
+  container   Container @relation(fields: [containerId], references: [id], onDelete: Cascade)
+  containerId String
 }

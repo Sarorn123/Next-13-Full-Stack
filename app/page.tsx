@@ -1,21 +1,11 @@
-import { getServerSession } from "next-auth";
-import Link from "next/link";
-import { prisma } from "../db/client";
-
-async function getPosts() {
-  return await prisma.post.findMany();
-}
-
+import DragDrop from "@/components/dragdrop/DragDrop";
 export default async function Home() {
-  const session = await getServerSession();
-  const posts = await getPosts();
-
   return (
     <>
-      <h1>from page is server sid component</h1>
-      {JSON.stringify(session?.user)}
-      <h1>Posts</h1>
-      {JSON.stringify(posts)}
+      
+      <DragDrop />
+      <div className="absolute top-20 left-80 bg-green-500 blur-[100px] w-80 h-80 -z-10"></div>
+      <div className="absolute top-60 right-60 bg-red-500 blur-3xl w-80 h-80 -z-10"></div>
     </>
   );
 }

@@ -128,6 +128,8 @@ export default function DragDrop() {
     toast.success("Delete Success 🎉✈");
   }
 
+   console.log(data)
+
   return (
     <>
       <Toaster />
@@ -159,13 +161,13 @@ export default function DragDrop() {
             <Container
               key={index}
               id={container.id}
-              color={container.color}
               label={container.label}
               todos={container.todos}
               // for drag loading purpose
               isDraggingId={isDraggingId}
               onDeleteTodo={onDeleteTodo}
             />
+            // <h1>Hello</h1>
           ))}
         </div>
       </DragDropContext>

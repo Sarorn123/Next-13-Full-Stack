@@ -7,7 +7,6 @@ import Todo from "./Todo";
 
 type Props = {
   id: string;
-  color: string;
   label: string;
   todos: TodoType[];
   isDraggingId: string;
@@ -15,14 +14,13 @@ type Props = {
 };
 
 function Container({
-  color,
   label,
   todos,
   id,
   isDraggingId,
   onDeleteTodo,
 }: Props) {
-  return color ? (
+  return (
     <Droppable droppableId={id}>
       {(provided, { isDraggingOver }) => (
         <div
@@ -30,7 +28,7 @@ function Container({
             ${label === "Start" && `bg-red-500`}
             ${label === "Processing" && `bg-yellow-500`}
             ${label === "Done" && `bg-green-500`}
-            ${isDraggingOver && 'bg-slate-800'}
+            ${isDraggingOver && '!bg-slate-800'}
           `}
           {...provided.droppableProps}
           ref={provided.innerRef}
@@ -51,9 +49,7 @@ function Container({
         </div>
       )}
     </Droppable>
-  ) : (
-    <></>
-  );
+  ) 
 }
 
 export default Container;

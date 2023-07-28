@@ -57,12 +57,11 @@ model User {
 }
 
 model Container {
-  id            String @id @default(uuid())
-  color         String
-  label         String
-  user          User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId        String
-  todos         Todo[]
+  id     String @id @default(uuid())
+  label  String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+  todos  Todo[]
 }
 
 model Todo {
